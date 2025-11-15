@@ -1,0 +1,19 @@
+<%- layout('layout') %>
+
+<h1>Shop</h1>
+
+<div class="filters">
+    <!-- Add filters for categories and tags here -->
+</div>
+
+<div class="product-grid">
+    <% products.forEach(product => { %>
+        <div class="product-card">
+            <a href="/product/<%= product._id %>">
+                <img src="<%= product.images[0] %>" alt="<%= product.name %>">
+                <h3><%= product.name %></h3>
+                <p><%= product.price %></p>
+            </a>
+        </div>
+    <% }) %>
+</div>

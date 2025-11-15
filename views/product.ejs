@@ -1,0 +1,37 @@
+<%- layout('layout') %>
+
+<div class="product-page">
+    <div class="product-images">
+        <% product.images.forEach(image => { %>
+            <img src="<%= image %>" alt="<%= product.name %>">
+        <% }) %>
+    </div>
+    <div class="product-details">
+        <h1><%= product.name %></h1>
+        <p class="price"><%= product.price %></p>
+        <p><%= product.description %></p>
+        <a href="https://ig.me/m/[YOUR_INSTA_USERNAME]" class="btn">ORDER ON INSTAGRAM</a>
+        <button class="like-btn" data-id="<%= product._id %>">Like (<%= product.likes %>)</button>
+        <button class="wishlist-btn" data-id="<%= product._id %>">Add to Wishlist</button>
+
+        <div class="reviews">
+            <h2>Reviews</h2>
+            <% product.reviews.forEach(review => { %>
+                <% if (review.approved) { %>
+                    <div class="review">
+                        <p><strong><%= review.username %></strong></p>
+                        <p><%= review.comment %></p>
+                    </div>
+                <% } %>
+            <% }) %>
+        </div>
+
+        <% if (user) { %>
+            <form action="/review/<%= product._id %>" method="POST">
+                <h2>Add a Review</h2>
+                <textarea name="comment" required></textarea>
+                <button type="submit">Submit Review</button>
+            </form>
+        <% } %>
+    </div>
+</div>
