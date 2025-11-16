@@ -5,8 +5,8 @@ const passport = require('passport');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const methodOverride = require('method-override');
-const expressEjsLayouts = require('express-ejs-layouts');
 const dotenv = require('dotenv');
+const ejsLayouts = require('express-ejs-layouts');
 
 const connectDB = require('./config/db');
 
@@ -21,7 +21,7 @@ const app = express();
 require('./config/passport')(passport);
 
 // EJS Setup
-app.use(expressEjsLayouts);
+app.use(ejsLayouts);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -42,6 +42,13 @@ app.use(session({
 // Passport Configuration
 app.use(passport.initialize());
 app.use(passport.session());
+
+// <<< FIX: Global variable middleware
+// This makes `user` available in all templates
+app.use(function(req, res, next) {
+  res.locals.user = req.user || null;
+  next();
+});
 
 // Routes
 app.use('/', require('./routes/index'));
