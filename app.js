@@ -1,12 +1,12 @@
 const express = require('express');
-const path = new require('path');
+const path = require('path');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const methodOverride = require('method-override');
 const dotenv = require('dotenv');
-const ejsLayouts = require('express-ejs-layouts'); // <<< FIX 1: REQUIRE THE PACKAGE
+const ejsLayouts = require('express-ejs-layouts'); // <<< THIS LINE WAS ADDED
 
 const connectDB = require('./config/db');
 
@@ -21,7 +21,7 @@ const app = express();
 require('./config/passport')(passport);
 
 // EJS Setup
-app.use(ejsLayouts); // <<< FIX 2: USE THE PACKAGE
+app.use(ejsLayouts); // <<< THIS LINE WAS ADDED
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
