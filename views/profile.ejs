@@ -1,0 +1,36 @@
+<h1>Welcome, <%= user.username %></h1>
+
+<h2>Your Wishlist</h2>
+<div class="product-grid">
+    <% user.wishlist.forEach(product => { %>
+        <div class="product-card">
+            <a href="/product/<%= product._id %>">
+                <img src="<%= product.images[0] %>" alt="<%= product.name %>">
+                <h3><%= product.name %></h3>
+                <p><%= product.price %></p>
+            </a>
+        </div>
+    <% }) %>
+</div>
+
+<h2>Your Reviews</h2>
+<% reviews.forEach(review => { %>
+    <div class="review">
+        <p><strong><%= review.product.name %></strong></p>
+        <p><%= review.comment %></p>
+        <p>Status: <%= review.approved ? 'Approved' : 'Pending' %></p>
+    </div>
+<% }) %>
+
+<h2>Change Password</h2>
+<form action="/profile/change-password" method="POST">
+    <div>
+        <label for="password">New Password</label>
+        <input type="password" name="password" id="password" required>
+    </div>
+    <div>
+        <label for="confirmPassword">Confirm New Password</label>
+        <input type="password" name="confirmPassword" id="confirmPassword" required>
+    </div>
+    <button type="submit">Change Password</button>
+</form>

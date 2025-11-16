@@ -1,0 +1,14 @@
+<h1>Pending Reviews</h1>
+
+<% reviews.forEach(review => { %>
+    <div class="review">
+        <p><strong><%= review.product.name %></strong></p>
+        <p><%= review.comment %></p>
+        <form action="/admin/review/approve/<%= review._id %>" method="POST">
+            <button type="submit">Approve</button>
+        </form>
+        <form action="/admin/review/delete/<%= review._id %>" method="POST">
+            <button type="submit">Delete</button>
+        </form>
+    </div>
+<% }) %>

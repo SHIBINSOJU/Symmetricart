@@ -1,0 +1,22 @@
+<h1>Admin Dashboard</h1>
+
+<h2>Top Searched Terms</h2>
+<ul>
+    <% topSearches.forEach(search => { %>
+        <li><%= search.term %> (<%= search.searchCount %>)</li>
+    <% }) %>
+</ul>
+
+<h2>Pending Reviews</h2>
+<% pendingReviews.forEach(review => { %>
+    <div class="review">
+        <p><strong><%= review.product.name %></strong></p>
+        <p><%= review.comment %></p>
+        <form action="/admin/review/approve/<%= review._id %>" method="POST">
+            <button type="submit">Approve</button>
+        </form>
+        <form action="/admin/review/delete/<%= review._id %>" method="POST">
+            <button type="submit">Delete</button>
+        </form>
+    </div>
+<% }) %>
